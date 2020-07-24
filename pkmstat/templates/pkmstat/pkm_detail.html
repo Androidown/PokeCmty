@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ pokemon.name_CHS }}</title>
+</head>
+<body>
+<h3>{{ pokemon.name_CHS }}</h3>
+<table class="bg-龙 bd-电 roundy" style="white-space:nowrap">
+    <tbody>
+    <tr class="bgl-龙 textblack">
+        <th colspan="2" rowspan="1" class="roundytl-6"><a title="种族值">种族值</a>
+        </th>
+    </tr>
+    <tr class="bgl-HP">
+        <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
+            <div style="float:left" class="textblack"><a title="ＨＰ">ＨＰ</a>：</div>
+            <div style="float:right">{{pokemon.HP}}</div>
+        </th>
+        <td style="width:255px">
+            <div class="bd-HP bw-1 bg-HP" style="width: calc(100% * {{pokemon.HP}}/255); height:20px"></div>
+        </td>
+    </tr>
+    <tr class="bgl-攻击">
+        <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
+            <div style="float:left" class="textblack"><a title="攻击">攻击</a>：</div>
+            <div style="float:right">{{pokemon.ATK}}</div>
+        </th>
+        <td style="width:255px">
+            <div class="bd-攻击 bw-1 bg-攻击" style="width: calc(100% * {{pokemon.ATK}}/255); height:20px"></div>
+        </td>
+    </tr>
+    <tr class="bgl-防御">
+        <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
+            <div style="float:left" class="textblack"><a title="防御">防御</a>：</div>
+            <div style="float:right">{{pokemon.DEF}}</div>
+        </th>
+        <td style="width:255px">
+            <div class="bd-防御 bw-1 bg-防御" style="width: calc(100% * {{pokemon.DEF}}/255); height:20px"></div>
+        </td>
+    </tr>
+    <tr class="bgl-特攻">
+        <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
+            <div style="float:left" class="textblack"><a title="特攻">特攻</a>：</div>
+            <div style="float:right">{{pokemon.SPA}}</div>
+        </th>
+        <td style="width:255px">
+            <div class="bd-特攻 bw-1 bg-特攻" style="width: calc(100% * {{pokemon.SPA}}/255); height:20px"></div>
+        </td>
+    </tr>
+    <tr class="bgl-特防">
+        <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
+            <div style="float:left" class="textblack"><a title="特防">特防</a>：</div>
+            <div style="float:right">{{pokemon.SPD}}</div>
+        </th>
+        <td style="width:255px">
+            <div class="bd-特防 bw-1 bg-特防" style="width: calc(100% * {{pokemon.SPD}}/255); height:20px"></div>
+        </td>
+    </tr>
+    <tr class="bgl-速度">
+        <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
+            <div style="float:left" class="textblack"><a title="速度">速度</a>：</div>
+            <div style="float:right">{{pokemon.SPE}}</div>
+        </th>
+        <td style="width:255px">
+            <div class="bd-速度 bw-1 bg-速度" style="width: calc(100% * {{pokemon.SPE}}/255); height:20px"></div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+{{ pokemon.type1 }}{% if pokemon.type2 %}, {{ pokemon.type2 }}{% endif %}
+</body>
+</html>
+

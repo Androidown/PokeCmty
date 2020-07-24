@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+<body>
+{% for pm in pokemons %}
+<table>
+    <tr>
+        <td>宝可梦</td>
+        <td>{{pm.name_CHS}}</td>
+    </tr>
+    <tr>
+        <td>HP</td>
+        <td>{{pm.HP}}</td>
+    <tr>
+        <td>ATK</td>
+        <td>{{pm.ATK}}</td>
+    </tr>
+    <tr>
+        <td>DEF</td>
+        <td>{{pm.DEF}}</td>
+    </tr>
+        <tr>
+        <td>SPA</td>
+        <td>{{pm.SPA}}</td>
+    </tr>
+    <tr>
+        <td>SPD</td>
+        <td>{{pm.SPD}}</td>
+    </tr>
+        <tr>
+        <td>SPE</td>
+        <td>{{pm.SPE}}</td>
+    </tr>
+{% endfor %}
+</table>
+</body>
+</html>

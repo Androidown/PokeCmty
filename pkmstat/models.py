@@ -30,8 +30,12 @@ class PokeMon(models.Model):
 
     class Meta:
         unique_together = ("species", "form")
-
-
-    def get_basic_stats(self, spcs, forme):
-        try:
-            PokeMon.objects.get()
+    #
+    #
+    # def get_basic_stats(self, spcs, forme):
+    #     try:
+    #         PokeMon.objects.get(species=spcs, form=forme)
+    #
+    #
+    # def get_first_n_pokemons(self, n):
+    #     return PokeMon.objects.filter(pk__lte=n)
