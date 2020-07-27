@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Result</title>
+</head>
+<body>
+    {% if pkms %}
+        <p>Found {{ pkms|length }} PokeMon{{ pkms|pluralize }}: </p>
+        <ul>
+            {% for pkm in pkms %}
+            <li><a href="{%url 'stat' pkm.species %}-{{pkm.form}}">{{ pkm.species}}: {{ pkm.name_CHS }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No result found for {{ key }}</p>
+    {% endif %}
+</body>
+</html>

@@ -30,6 +30,9 @@ class PokeMon(models.Model):
 
     class Meta:
         unique_together = ("species", "form")
+
+    def __str__(self):
+        return self.name_CHS
     #
     #
     # def get_basic_stats(self, spcs, forme):
