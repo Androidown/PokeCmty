@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from pkmstat.views import search
+import pkmstat.views
 
 urlpatterns = [
     path('stat/', include('pkmstat.urls')),
     path('admin/', admin.site.urls),
-    path('search/', search, name='search'),
+    path('search/', pkmstat.views.search, name='search'),
 ]
