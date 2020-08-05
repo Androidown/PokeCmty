@@ -1,0 +1,40 @@
+.move-table {
+    vertical-align: middle;
+    border-collapse: collapse;
+}
+
+/* td.type-Normal::before {
+    content: "";
+    background-image: url("images/Normal_icon_SwSh.png");
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-size: 1.5em 1.5em;
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+} */
+
+/* 
+td.type-Normal {
+    vertical-align: middle;
+} */
+
+.type-icon-move {
+    display: table-cell;
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+}
+
+.type-pkm {
+    max-width: 100px;    
+    max-height: 22px;
+}
+
+.status-bar {
+    background-color: greenyellow;
+}
+
+.hide {
+    display: none;
+}

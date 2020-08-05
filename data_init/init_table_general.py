@@ -3,7 +3,7 @@
 import os
 from bs4 import BeautifulSoup
 from cmntbl.models import *
-from db_init import yield_valid_pm, BASE
+from data_init import yield_valid_pm, BASE
 
 
 def init_table_abilities():
@@ -26,9 +26,11 @@ def init_table_abilities():
 
 
 def init_table_types():
-    all_types = ["一般", "格斗", "飞行", "毒", "地面", "岩石", "虫", "幽灵", "钢", "火", "水", "草", "电", "超能", "冰", "龙", "恶", "妖精",]
-    for tid, ttext in enumerate(all_types):
-        Types.objects.create(type_id=tid, type_CHS=ttext)
+    types_CHS = ["一般", "格斗", "飞行", "毒", "地面", "岩石", "虫", "幽灵", "钢", "火", "水", "草", "电", "超能", "冰", "龙", "恶", "妖精",]
+    types_EN = ["Normal", "Fighting", "Flying", "Poison", "Ground", "Rock", "Bug", "Ghost", "Steel", "Fire", "Water",
+                "Grass", "Electric", "Psychic", "Ice", "Dragon", "Dark", "Fairy"]
+    for tid, (text_CHS, text_EN) in enumerate(zip(types_CHS, types_EN)):
+        Types.objects.create(type_id=tid, type_CHS=text_CHS, type_EN=text_EN)
 
 
 def init_table_pokemon():
@@ -45,12 +47,12 @@ def init_table_pokemon():
             'SPA': pkm.STAS[3],
             'SPD': pkm.STAS[4],
             'SPE': pkm.STAS[2],
-            'type1': pkm.type1,
-            'ability1': pkm.abilities[0],
-            'ability2': pkm.abilities[1],
-            'abilityH': pkm.abilities[2],
+            'type1': Types.objects.get(type_id=pkm.type1),
+            'ability1': Ability.objects.get(pk=pkm.abilities[0]),
+            'ability2': Ability.objects.get(pk=pkm.abilities[1]),
+            'abilityH': Ability.objects.get(pk=pkm.abilities[2]),
             'name_CHS': SPECIES[pkm.species]
         }
         if not pkm.type2 == pkm.type1:
-            kwargs['type2'] = pkm.type2
+            kwargs['type2'] = Types.objects.get(type_id=pkm.type2)
         PokeMon.objects.create(**kwargs)

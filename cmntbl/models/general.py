@@ -7,6 +7,7 @@ __all__ = ['Types', 'Ability', 'PokeMon']
 class Types(models.Model):
     type_id = PositiveTinyIntegerField(primary_key=True, unique=True, default=0)
     type_CHS = models.CharField(max_length=2)
+    type_EN = models.CharField(max_length=10)
 
     def __str__(self):
         return self.type_CHS
@@ -39,6 +40,10 @@ class PokeMon(models.Model):
 
     class Meta:
         unique_together = ("species", "form")
+
+    @property
+    def STAT_SUM(self):
+        return self.HP + self.ATK + self.DEF + self.SPA + self.SPD + self.SPE
 
     def __str__(self):
         return self.name_CHS

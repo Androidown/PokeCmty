@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'pkmstat/move_pool.css' %}" />
     <title>{{ pokemon.name_CHS }}</title>
 </head>
 <body>
@@ -18,7 +20,7 @@
             <div style="float:right">{{pokemon.HP}}</div>
         </th>
         <td style="width:255px">
-            <div class="bd-HP bw-1 bg-HP" style="width: calc(100% * {{pokemon.HP}}/255); height:20px"></div>
+            <div class="status-bar" style="width: calc(100% * {{pokemon.HP}}/255); height:20px"></div>
         </td>
     </tr>
     <tr class="bgl-攻击">
@@ -27,7 +29,7 @@
             <div style="float:right">{{pokemon.ATK}}</div>
         </th>
         <td style="width:255px">
-            <div class="bd-攻击 bw-1 bg-攻击" style="width: calc(100% * {{pokemon.ATK}}/255); height:20px"></div>
+            <div class="status-bar" style="width: calc(100% * {{pokemon.ATK}}/255); height:20px"></div>
         </td>
     </tr>
     <tr class="bgl-防御">
@@ -36,7 +38,7 @@
             <div style="float:right">{{pokemon.DEF}}</div>
         </th>
         <td style="width:255px">
-            <div class="bd-防御 bw-1 bg-防御" style="width: calc(100% * {{pokemon.DEF}}/255); height:20px"></div>
+            <div class="status-bar" style="width: calc(100% * {{pokemon.DEF}}/255); height:20px"></div>
         </td>
     </tr>
     <tr class="bgl-特攻">
@@ -45,7 +47,7 @@
             <div style="float:right">{{pokemon.SPA}}</div>
         </th>
         <td style="width:255px">
-            <div class="bd-特攻 bw-1 bg-特攻" style="width: calc(100% * {{pokemon.SPA}}/255); height:20px"></div>
+            <div class="status-bar" style="width: calc(100% * {{pokemon.SPA}}/255); height:20px"></div>
         </td>
     </tr>
     <tr class="bgl-特防">
@@ -54,7 +56,7 @@
             <div style="float:right">{{pokemon.SPD}}</div>
         </th>
         <td style="width:255px">
-            <div class="bd-特防 bw-1 bg-特防" style="width: calc(100% * {{pokemon.SPD}}/255); height:20px"></div>
+            <div class="status-bar" style="width: calc(100% * {{pokemon.SPD}}/255); height:20px"></div>
         </td>
     </tr>
     <tr class="bgl-速度">
@@ -63,12 +65,46 @@
             <div style="float:right">{{pokemon.SPE}}</div>
         </th>
         <td style="width:255px">
-            <div class="bd-速度 bw-1 bg-速度" style="width: calc(100% * {{pokemon.SPE}}/255); height:20px"></div>
+            <div class="status-bar" style="width: calc(100% * {{pokemon.SPE}}/255); height:20px"></div>
+        </td>
+    </tr>
+    <tr class="bgl-速度">
+        <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
+            <div style="float:left" class="textblack"><a title="速度">总和</a>：</div>
+            <div style="float:right">{{pokemon.STAT_SUM}}</div>
+        </th>
+        <td style="width:255px">
+            <div class="status-bar" style="width: calc(100% * {{pokemon.STAT_SUM}}/1530); height:20px"></div>
         </td>
     </tr>
     </tbody>
 </table>
-{{ pokemon.type1.type_CHS }}{% if pokemon.type2 %}, {{ pokemon.type2.type_CHS }}{% endif %}
+<div>
+    <img class="type-pkm" src="{% static 'pkmstat/images/type/' %}{{ pokemon.type1.type_EN }}_Text.png">
+    {% if pokemon.type2 %}  
+    <img class="type-pkm" src="{% static 'pkmstat/images/type/' %}{{ pokemon.type2.type_EN }}_Text.png">
+    {% endif %}
+</div>
+<div>特性：{{pokemon.ability1.ability_CHS}} {{pokemon.ability2.ability_CHS}} {{pokemon.abilityH.ability_CHS}}</div>
+<div>技能池：</div>
+<table class="move-table">
+    <tbody>
+        <tr>
+            <td colspan="2">技能</td>
+            <td>威力</td>
+            <td>命中</td>
+        </tr>
+        {% for mv in move_pool %}
+        <tr>
+            <td><img class="type-icon-move" src="{% static 'pkmstat/images/type/' %}{{ mv.mv_type.type_EN }}_icon_SwSh.png"><a hidden>{{mv.mv_type.type_id}}</a></td>
+            <td>{{ mv.move_CHS }}</td>
+            <td>{{ mv.power }}</td>
+            <td>{% if not mv.accuracy %} -- {% else %} {{ mv.accuracy }} {% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
 </body>
 </html>
 

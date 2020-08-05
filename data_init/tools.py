@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-from db_init import BASE, PKMPersonal
+from data_init import BASE, PKMPersonal
 import os
 
 EvoSpecies = {

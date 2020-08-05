@@ -3,8 +3,8 @@
 from bs4 import BeautifulSoup
 import os
 from cmntbl.models import *
-from db_init import yield_valid_pm
-from db_init.tools import ALL_MOVES
+from data_init import yield_valid_pm
+from data_init.tools import ALL_MOVES
 
 BASE = os.path.dirname(__file__)
 
@@ -66,6 +66,6 @@ def init_table_learnablemoves():
         move_int = 0
         for mv in ALL_MOVES[pkm.real_species]:
             move_int += 1 << (mv - 1)
-        kwargs['bin_move'] = move_int.to_bytes(128, 'little', signed=False)
+        kwargs['bin_moves'] = move_int.to_bytes(128, 'little', signed=False)
 
         LearnableMove.objects.create(**kwargs)

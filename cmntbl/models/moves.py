@@ -24,7 +24,7 @@ class Moves(models.Model):
 
 
 class LearnableMove(models.Model):
-    pkm_idx = models.PositiveIntegerField(primary_key=True, unique=True)
+    pkm_id = models.PositiveIntegerField(primary_key=True, unique=True)
     species = models.PositiveIntegerField()
     form = PositiveTinyIntegerField(default=0)
     bin_moves = models.BinaryField(max_length=128)
