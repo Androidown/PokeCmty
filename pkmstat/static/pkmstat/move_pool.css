@@ -3,6 +3,12 @@
     border-collapse: collapse;
 }
 
+.move-table td {
+    margin: 1em;
+    padding: 1em;
+    background-color: khaki;
+    border: white 1px solid;
+}
 /* td.type-Normal::before {
     content: "";
     background-image: url("images/Normal_icon_SwSh.png");
@@ -32,9 +38,26 @@ td.type-Normal {
 }
 
 .status-bar {
-    background-color: greenyellow;
+    background-color: #4b5a6b;
+    /* position: absolute; */
+    bottom: 0;
+    /* width: 0; */
+    left: 0;
+    /* height: 5px; */
+    animation: linearwipe .4s steps(100, end); 
+    width: 0%;
+    /* transition: all .2s ease-in-out; */
+  }
+  
+@keyframes linearwipe{ 
+from { width: 0; } 
 }
 
-.hide {
+.row-hidden {
     display: none;
+}
+
+.next-hidden:hover + .row-hidden {
+    display: table-row;
+    /* float: left; */
 }

@@ -92,14 +92,19 @@
         <tr>
             <td colspan="2">技能</td>
             <td>威力</td>
+            <td>pp</td>
             <td>命中</td>
         </tr>
         {% for mv in move_pool %}
-        <tr>
+        <tr class="next-hidden">
             <td><img class="type-icon-move" src="{% static 'pkmstat/images/type/' %}{{ mv.mv_type.type_EN }}_icon_SwSh.png"><a hidden>{{mv.mv_type.type_id}}</a></td>
             <td>{{ mv.move_CHS }}</td>
-            <td>{{ mv.power }}</td>
-            <td>{% if not mv.accuracy %} -- {% else %} {{ mv.accuracy }} {% endif %}</td>
+            <td>{% if not mv.power %} -- {% else %} {{ mv.power }} {% endif %}</td>
+            <td>{% if not mv.pp %} -- {% else %} {{ mv.pp }} {% endif %}</td>
+            <td >{% if not mv.accuracy %} -- {% else %} {{ mv.accuracy }} {% endif %}</td>
+        </tr>
+        <tr class="row-hidden">
+            <td colspan="5" >{{ mv.description }} </td>
         </tr>
         {% endfor %}
     </tbody>

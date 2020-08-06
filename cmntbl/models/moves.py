@@ -16,11 +16,12 @@ class MoveCategory(models.Model):
 class Moves(models.Model):
     move_CHS = models.CharField(max_length=8)
     move_EN = models.CharField(max_length=30)
-    pp = PositiveTinyIntegerField(null=False, default=1)
-    power = models.PositiveSmallIntegerField(null=True, default=10)
+    pp = PositiveTinyIntegerField(null=True)
+    power = models.PositiveSmallIntegerField(null=True)
     accuracy = models.PositiveSmallIntegerField(null=True, validators=())
     category = models.ForeignKey(MoveCategory, on_delete=models.DO_NOTHING, null=True, to_field='cid')
     mv_type = models.ForeignKey(Types, on_delete=models.DO_NOTHING)
+    description = models.CharField(max_length=80)
 
 
 class LearnableMove(models.Model):
