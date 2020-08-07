@@ -103,8 +103,8 @@
             <td>{% if not mv.pp %} -- {% else %} {{ mv.pp }} {% endif %}</td>
             <td >{% if not mv.accuracy %} -- {% else %} {{ mv.accuracy }} {% endif %}</td>
         </tr>
-        <tr class="row-hidden">
-            <td colspan="5" >{{ mv.description }} </td>
+        <tr>
+            <td colspan="5" ><div class="row-hidden"> {{ mv.description }} </div></td>
         </tr>
         {% endfor %}
     </tbody>
