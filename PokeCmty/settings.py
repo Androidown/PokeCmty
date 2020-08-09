@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'cmntbl.apps.CmntblConfig',
     'team.apps.TeamConfig',
     'pkmstat.apps.PkmstatConfig',
+    'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -82,7 +83,7 @@ DATABASES = {
         'NAME': 'PokeCMTY',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '192.168.29.30',
+        'HOST': '192.168.226.129',
         'PORT': '3306',
         'OPTIONS': {
             'charset': 'utf8mb4',

@@ -7,17 +7,21 @@ import json
 import os
 import shutil
 import requests
+from concurrent.futures import ThreadPoolExecutor
 
-proxy_form = "{}://web-proxy.sgp.hpecorp.net:8080"
-PROXY = {"http": proxy_form.format("http"), "https": proxy_form.format("https")}
-# PROXY = {}
+# proxy_form = "{}://web-proxy.sgp.hpecorp.net:8080"
+# PROXY = {"http": proxy_form.format("http"), "https": proxy_form.format("https")}
+PROXY = {}
 headers = {
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
             "Accept-Language": "zh-CN,zh;q=0.9,ja;q=0.8,en;q=0.7,zh-TW;q=0.6",
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
             "Content-Type": "application/x-www-form-urlencoded",
         }
-IMAGE_FOLDER = 'images/'
+IMAGE_FOLDER = 'image/'
+
+with open(os.path.join(BASE, f"data/species_en"), "rt", encoding="utf8") as db:
+    SPECIES = db.read().splitlines()
 
 
 class ParseError(Exception):
@@ -44,12 +48,54 @@ class HtmlParser(object):
 
 
 def save_single_image(url, fname):
+    print(url)
     r = requests.get(url, stream=True, proxies=PROXY)
+    if r.status_code == 404:
+        return False
     with open(os.path.join(IMAGE_FOLDER, fname), 'wb') as img:
         r.raw.decode_content = True
         shutil.copyfileobj(r.raw, img)
+    return True
 
 
-if __name__ == '__main__':
-    for u, f in HtmlParser(os.path.join(BASE, "data/icons.html")).yield_img_url():
-        save_single_image(u, f)
+def save_all_pm_image_no_alter(start, end):
+    url = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/{:0>3d}.png"
+    for idx in range(start, end):
+        save_single_image(url.format(idx), "{:0>3d}.png".format(idx))
+
+
+def save_all_pm_image_alter(start, end):
+    url = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/{:0>3d}_f{}.png"
+
+    for idx in range(start, end):
+        alter = 2
+        while save_single_image(url.format(idx, alter), "{:0>3d}_{}.png".format(idx, alter)):
+            alter += 1
+
+
+def multi_scrapy(start, end, worker=20):
+    jobs = []
+    gap = (end - start)//worker
+    with ThreadPoolExecutor(max_workers=worker) as pool:
+        for cur_start in range(start, gap*worker, gap):
+            cur_end = cur_start + gap
+            if end - cur_end < gap:
+                cur_end = end
+            jobs.append(pool.submit(save_all_pm_image_alter, cur_start, cur_end))
+            # jobs.append(pool.submit(save_all_pm_image_no_alter, cur_start, cur_end))
+        for j in jobs:
+            j.result()
+
+
+if __name__ == "__main__":
+    # multi_scrapy(892, 893, 1)
+    save_all_pm_image_alter(892, 893)
+    # whole = set(range(1, 831))
+    # actual = set()
+    #
+    # for f in os.listdir(IMAGE_FOLDER):
+    #     actual.add(int(f[:3]))
+    #
+    # for i in whole.difference(actual):
+    #     save_all_pm_image_no_alter(i, i+1)
+

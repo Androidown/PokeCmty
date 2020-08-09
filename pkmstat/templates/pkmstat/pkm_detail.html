@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     {% load static %}
+    {% load humanize %}
     <link rel="stylesheet" type="text/css" href="{% static 'pkmstat/move_pool.css' %}" />
     <title>{{ pokemon.name_CHS }}</title>
 </head>
 <body>
 <h3>{{ pokemon.name_CHS }}</h3>
+<div><img src="{% static 'pkmstat/images/pokemon/' %}{{ pokemon.species|stringformat:'03d' }}.png"></div>
 <table class="bg-龙 bd-电 roundy" style="white-space:nowrap">
     <tbody>
     <tr class="bgl-龙 textblack">
