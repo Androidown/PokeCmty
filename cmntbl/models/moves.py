@@ -33,9 +33,9 @@ class LearnableMove(models.Model):
     class Meta:
         unique_together = ("species", "form")
 
-    @property
-    def moves(self):
-        moves_int = int.from_bytes(self.bin_moves, 'little', signed=False)
+    @staticmethod
+    def moves(binary_moves):
+        moves_int = int.from_bytes(binary_moves, 'little', signed=False)
         move_list = []
         idx = 1
         while moves_int:
