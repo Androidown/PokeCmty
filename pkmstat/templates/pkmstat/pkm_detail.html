@@ -14,14 +14,14 @@
     <div>
         <img id="pkm-image" src="{% static 'pkmstat/images/pokemon/' %}{{ pokemon.species|stringformat:'03d' }}.png">
         <div class="button left">
-            <a href="prev/?species={{pokemon.species}}">
+            <a href="{{pokemon.species}}/prev">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path class="arrow type-color" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
                 </svg>
             </a>
         </div>
         <div class="button right">
-            <a href="next/?species={{pokemon.species}}">
+            <a href="{{pokemon.species}}/next">
                 <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path class="arrow type-color" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                 </svg>
