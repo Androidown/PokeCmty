@@ -11,7 +11,7 @@ def show_stats(request, species=1, form=0):
     try:
         pkm = PokeMon.objects.select_related('ability1', 'ability2', 'abilityH').get(species=species, form=form)
         move_raw = LearnableMove.objects.values('bin_moves').get(pk=pkm.pkm_id)
-        move_pool = Moves.objects.select_related('mv_type').filter(pk__in=LearnableMove.moves(move_raw['bin_moves']))
+        move_pool = Moves.objects.select_related('mv_type').filter(pk__in=LearnableMove.parse_moves(move_raw['bin_moves']))
     except ObjectDoesNotExist:
         raise Http404(f"Pokemon #{species}-{form} not found.")
     return render(request, 'pkmstat/pkm_detail.html', {'pokemon': pkm, 'move_pool': move_pool})

@@ -34,7 +34,7 @@ class LearnableMove(models.Model):
         unique_together = ("species", "form")
 
     @staticmethod
-    def moves(binary_moves):
+    def parse_moves(binary_moves):
         moves_int = int.from_bytes(binary_moves, 'little', signed=False)
         move_list = []
         idx = 1
@@ -44,3 +44,7 @@ class LearnableMove(models.Model):
             idx += 1
             moves_int = moves_int >> 1
         return move_list
+
+    @property
+    def moves(self):
+        return self.parse_moves(self.bin_moves)

@@ -83,7 +83,7 @@ DATABASES = {
         'NAME': 'PokeCMTY',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '192.168.226.129',
+        'HOST': '192.168.29.30',
         'PORT': '3306',
         'OPTIONS': {
             'charset': 'utf8mb4',

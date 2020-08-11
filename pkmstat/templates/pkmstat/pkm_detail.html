@@ -5,6 +5,7 @@
     {% load static %}
     {% load humanize %}
     <link rel="stylesheet" type="text/css" href="{% static 'pkmstat/move_pool.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'pkmstat/pm_info.css' %}" />
     <title>{{ pokemon.name_CHS }}</title>
 </head>
 <body>
@@ -16,14 +17,14 @@
         <div class="button left">
             <a href="{{pokemon.species}}/prev">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path class="arrow type-color" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+                    <path class="arrow type-color-fill" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
                 </svg>
             </a>
         </div>
         <div class="button right">
             <a href="{{pokemon.species}}/next">
                 <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path class="arrow type-color" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+                    <path class="arrow type-color-fill" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                 </svg>
             </a>
         </div>
@@ -110,29 +111,33 @@
 </div>
 <div>特性：{{pokemon.ability1.ability_CHS}} {{pokemon.ability2.ability_CHS}} {{pokemon.abilityH.ability_CHS}}</div>
 <div>技能池：</div>
-<table class="move-table">
-    <tbody>
-        <tr>
-            <td colspan="2">技能</td>
-            <td>威力</td>
-            <td>pp</td>
-            <td>命中</td>
-        </tr>
-        {% for mv in move_pool %}
-        <tr class="next-hidden">
-            <td><img class="type-icon-move" src="{% static 'pkmstat/images/type/' %}{{ mv.mv_type.type_EN }}_icon_SwSh.png"><a hidden>{{mv.mv_type.type_id}}</a></td>
-            <td>{{ mv.move_CHS }}</td>
-            <td>{% if not mv.power %} -- {% else %} {{ mv.power }} {% endif %}</td>
-            <td>{% if not mv.pp %} -- {% else %} {{ mv.pp }} {% endif %}</td>
-            <td >{% if not mv.accuracy %} -- {% else %} {{ mv.accuracy }} {% endif %}</td>
-        </tr>
-        <tr>
-            <td colspan="5" ><div class="row-hidden"> {{ mv.description }} </div></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-
-</table>
+<div class="wrap-table">
+    <table class="move-table">
+        <thead class="type-color-bg">
+            <tr>
+                <th colspan="2">技能</th>
+                <th>威力</th>
+                <th>pp</th>
+                <th>命中</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mv in move_pool %}
+            <tr class="next-hidden type-color-bg-{{mv.mv_type.type_id}}">
+                <td class="type-icon-move"><img src="{% static 'pkmstat/images/type/' %}{{ mv.mv_type.type_EN }}_icon_SwSh.png"></td>
+                <td>{{ mv.move_CHS }}</td>
+                <td>{% if not mv.power %} -- {% else %} {{ mv.power }} {% endif %}</td>
+                <td>{% if not mv.pp %} -- {% else %} {{ mv.pp }} {% endif %}</td>
+                <td>{% if not mv.accuracy %} -- {% else %} {{ mv.accuracy }} {% endif %}</td>
+            </tr>
+            <tr class="type-color-bg-{{mv.mv_type.type_id}}">
+                <td colspan="5" ><div class="row-hidden"> {{ mv.description }} </div></td>
+                <!-- <td colspan="5" class="row-hidden"> {{ mv.description }}</td> -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 </body>
 <script type="text/javascript" src="{% static 'pkmstat/type_color.js' %}"></script>
 </html>
