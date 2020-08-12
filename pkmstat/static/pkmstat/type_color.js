@@ -5,7 +5,11 @@ var colorMap = [
     "243,210,59", "249,113,118", "116,206,192", "10,109,196", "90,83,102", "236,143,230"
 ];
 
-type_id = Number(document.getElementById('type_id').textContent);
+try {
+    type_id = Number(document.getElementById('type_id').textContent);
+} catch (TypeError) {
+    type_id = 0;
+}
 
 for (var cls of document.querySelectorAll('.type-color-fill')) {
     cls.style.fill = `rgb(${colorMap[type_id]})`;

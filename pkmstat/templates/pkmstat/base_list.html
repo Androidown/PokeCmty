@@ -1,40 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{title}}</title>
-</head>
-<body>
-{% for pm in pokemons %}
-<table>
-    <tr>
-        <td>宝可梦</td>
-        <td>{{pm.name_CHS}}</td>
-    </tr>
-    <tr>
-        <td>HP</td>
-        <td>{{pm.HP}}</td>
-    <tr>
-        <td>ATK</td>
-        <td>{{pm.ATK}}</td>
-    </tr>
-    <tr>
-        <td>DEF</td>
-        <td>{{pm.DEF}}</td>
-    </tr>
-        <tr>
-        <td>SPA</td>
-        <td>{{pm.SPA}}</td>
-    </tr>
-    <tr>
-        <td>SPD</td>
-        <td>{{pm.SPD}}</td>
-    </tr>
-        <tr>
-        <td>SPE</td>
-        <td>{{pm.SPE}}</td>
-    </tr>
-{% endfor %}
-</table>
-</body>
-</html>
+{% load static %}
+{% load humanize %}
+<link rel="stylesheet" type="text/css" href="{% static 'pkmstat/pm_preview.css' %}" />
+<ul>
+    {% for pkm in pokemon_list %}
+    <li>
+        <div class="type-color-bg-{{pkm.type1.type_id}}">
+            <div>
+                <img src="{% static 'pkmstat/images/pkm_icon/' %}{{ pkm.species|stringformat:'03d' }}.png">
+                <i class="icon-pokeball"></i>
+            </div>
+            <div>#{{ pkm.species }} {{ pkm.name_CHS }} </div>
+            <div>
+                <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pkm.type1.type_EN }}_Text.png">
+                {% if pkm.type2 %}  
+                <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pkm.type2.type_EN }}_Text.png">
+                {% endif %}
+            </div>
+            <div>特性：{{pkm.ability1.ability_CHS}} {{pkm.ability2.ability_CHS}} {{pkm.abilityH.ability_CHS}}</div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+
+
+<script type="text/javascript" src="{% static 'pkmstat/type_color.js' %}"></script>

@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <title>Search Result</title>
 </head>
+{% load static %}
 <body>
-    {% if pkms %}
-        <p>Found {{ pkms|length }} PokeMon{{ pkms|pluralize }}: </p>
-        <ul>
-            {% for pkm in pkms %}
-            <li><a href="{%url 'stat' pkm.species %}-{{pkm.form}}">{{ pkm.species}}: {{ pkm.name_CHS }}</a></li>
-            {% endfor %}
-        </ul>
+    {% if pokemon_list %}
+        <p>Found {{ pokemon_list|length }} PokeMon{{ pokemon_list|pluralize }}: </p>
+        {% include 'pkmstat/base_list.html' %}
     {% else %}
         <p>No result found for {{ key }}</p>
     {% endif %}

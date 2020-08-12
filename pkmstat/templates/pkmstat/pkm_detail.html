@@ -104,9 +104,9 @@
     </tbody>
 </table>
 <div>
-    <img class="type-pkm" src="{% static 'pkmstat/images/type/' %}{{ pokemon.type1.type_EN }}_Text.png">
+    <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pokemon.type1.type_EN }}_Text.png">
     {% if pokemon.type2 %}  
-    <img class="type-pkm" src="{% static 'pkmstat/images/type/' %}{{ pokemon.type2.type_EN }}_Text.png">
+    <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pokemon.type2.type_EN }}_Text.png">
     {% endif %}
 </div>
 <div>特性：{{pokemon.ability1.ability_CHS}} {{pokemon.ability2.ability_CHS}} {{pokemon.abilityH.ability_CHS}}</div>

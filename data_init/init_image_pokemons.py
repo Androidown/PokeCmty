@@ -3,7 +3,6 @@
 from data_init import BASE
 from bs4 import BeautifulSoup
 
-import json
 import os
 import shutil
 import requests
@@ -70,7 +69,18 @@ def save_all_pm_image_alter(start, end):
             alter += 1
 
 
-def multi_scrapy(start, end, worker=20):
+def save_all_pm_icon(start, end):
+    url = "https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/{}.png"
+    with open(f"{BASE}/data/species_en", "rt", encoding="utf8") as db:
+        species = db.read().splitlines()
+
+    for idx in range(start, end):
+        pm_name = species[idx].lower().replace('♀', "-f").replace("♂", "-m").replace(" ", "-")\
+            .replace(".", "").replace("’", "").replace(":", "").replace("é", 'e')
+        save_single_image(url.format(pm_name), "{:0>3d}.png".format(idx))
+
+
+def multi_scrapy(start, end, func, worker=20):
     jobs = []
     gap = (end - start)//worker
     with ThreadPoolExecutor(max_workers=worker) as pool:
@@ -78,21 +88,21 @@ def multi_scrapy(start, end, worker=20):
             cur_end = cur_start + gap
             if end - cur_end < gap:
                 cur_end = end
-            # jobs.append(pool.submit(save_all_pm_image_alter, cur_start, cur_end))
-            jobs.append(pool.submit(save_all_pm_image_no_alter, cur_start, cur_end))
+            jobs.append(pool.submit(func, cur_start, cur_end))
         for j in jobs:
             j.result()
 
 
 if __name__ == "__main__":
-    multi_scrapy(1, 893, 20)
+    # save_all_pm_icon(893, 894)
+    # multi_scrapy(1, 893, save_all_pm_icon, 30)
     # save_all_pm_image_alter(892, 893)
-    # whole = set(range(1, 831))
-    # actual = set()
-    #
-    # for f in os.listdir(IMAGE_FOLDER):
-    #     actual.add(int(f[:3]))
-    #
-    # for i in whole.difference(actual):
-    #     save_all_pm_image_no_alter(i, i+1)
+    whole = set(range(1, 894))
+    actual = set()
+
+    for f in os.listdir(IMAGE_FOLDER):
+        actual.add(int(f[:3]))
+
+    for i in whole.difference(actual):
+        save_all_pm_icon(i, i+1)
 

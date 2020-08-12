@@ -20,5 +20,6 @@ import pkmstat.views
 urlpatterns = [
     path('stat/', include('pkmstat.urls')),
     path('admin/', admin.site.urls),
-    path('search/', pkmstat.views.search, name='search'),
+    path('search/', pkmstat.views.PokeMonSearchList.as_view(), name='search'),
+    path('dex/', pkmstat.views.PokMonList.as_view(), name='dex'),
 ]

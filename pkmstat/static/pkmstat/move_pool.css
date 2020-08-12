@@ -61,10 +61,10 @@ div.row-hidden {
 }
 
 .next-hidden:hover + tr div{
-    /* transition: .6s ease-in max-height; */
+    transition: .6s ease-in max-height;
     transition: .6s ease-in line-height;
     transition-delay: 1.5s;
-    max-height: 400px;
+    /* max-height: 400px; */
     line-height: 2em;
     /* margin-top: .5em;
     margin-bottom: .5em; */

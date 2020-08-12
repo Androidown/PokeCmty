@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from cmntbl.models import PokeMon, LearnableMove, Moves
 from django.http import Http404, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.views.generic import ListView
 
 # def show_pkms(requset, species=1, form=0):
 #     return render(requset, 'pkmstat/base_list.html', {'pokemons': PokeMon().get_first_n_pokemons(species)})
@@ -21,15 +22,31 @@ def display_meta(request):
     return render(request, 'pkmstat/display_meta.html', {'meta': request.META})
 
 
-def search(request):
-    key = request.GET.get('key')
-    if not key:
-        return render(request, 'pkmstat/search.html')
-    if key.isdigit():
-        rslt = PokeMon.objects.filter(species=key)
-    else:
-        rslt = PokeMon.objects.filter(name_CHS__contains=key)
-    return render(request, 'pkmstat/search_rslt.html', {'pkms': rslt, 'key': key})
+class PokMonList(ListView):
+    model = PokeMon
+    template_name = 'pkmstat/poke_dex.html'
+
+
+class PokeMonSearchList(PokMonList):
+    template_name = 'pkmstat/search_rslt.html'
+
+    def get(self, request, *args, **kwargs):
+        key = request.GET.get('key')
+        if not key:
+            return render(request, 'pkmstat/search.html')
+        else:
+            return super().get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        key = self.request.GET.get('key')
+        if key.isdigit():
+            queryset = self.model.objects.filter(species=key)
+        else:
+            queryset = self.model.objects.filter(name_CHS__contains=key)
+        return queryset
+
+    def get_context_data(self):
+        return super().get_context_data(key=self.request.GET.get('key'))
 
 
 def nearby_pkm(request, species, loc):
