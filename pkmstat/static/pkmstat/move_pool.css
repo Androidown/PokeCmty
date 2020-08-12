@@ -55,16 +55,14 @@ div.row-hidden {
     overflow: hidden;
     max-height: 0px;
     max-width: inherit;
-    line-height: 0px;
-    transition: .4s ease-out max-height;
+    line-height: 0em;
     transition: .4s ease-out line-height;
 }
 
-.next-hidden:hover + tr div{
-    transition: .6s ease-in max-height;
+.next-hidden:hover + tr div {
     transition: .6s ease-in line-height;
     transition-delay: 1.5s;
-    /* max-height: 400px; */
+    max-height: 400px;
     line-height: 2em;
     /* margin-top: .5em;
     margin-bottom: .5em; */

@@ -26,6 +26,11 @@ class PokMonList(ListView):
     model = PokeMon
     template_name = 'pkmstat/poke_dex.html'
 
+    def get_queryset(self):
+        return self.model.objects.\
+            select_related('ability1', 'ability2', 'abilityH', 'type1', 'type2').\
+            all().order_by('pkm_id')
+
 
 class PokeMonSearchList(PokMonList):
     template_name = 'pkmstat/search_rslt.html'
@@ -40,9 +45,13 @@ class PokeMonSearchList(PokMonList):
     def get_queryset(self):
         key = self.request.GET.get('key')
         if key.isdigit():
-            queryset = self.model.objects.filter(species=key)
+            queryset = self.model.objects.\
+                select_related('ability1', 'ability2', 'abilityH', 'type1', 'type2').\
+                filter(species=key).order_by('pkm_id')
         else:
-            queryset = self.model.objects.filter(name_CHS__contains=key)
+            queryset = self.model.objects.\
+                select_related('ability1', 'ability2', 'abilityH', 'type1', 'type2').\
+                filter(name_CHS__contains=key).order_by('pkm_id')
         return queryset
 
     def get_context_data(self):

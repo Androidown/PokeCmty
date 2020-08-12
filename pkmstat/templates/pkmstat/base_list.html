@@ -1,26 +1,23 @@
 {% load static %}
 {% load humanize %}
 <link rel="stylesheet" type="text/css" href="{% static 'pkmstat/pm_preview.css' %}" />
-<ul>
-    {% for pkm in pokemon_list %}
-    <li>
-        <div class="type-color-bg-{{pkm.type1.type_id}}">
-            <div>
-                <img src="{% static 'pkmstat/images/pkm_icon/' %}{{ pkm.species|stringformat:'03d' }}.png">
-                <i class="icon-pokeball"></i>
-            </div>
-            <div>#{{ pkm.species }} {{ pkm.name_CHS }} </div>
-            <div>
-                <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pkm.type1.type_EN }}_Text.png">
-                {% if pkm.type2 %}  
-                <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pkm.type2.type_EN }}_Text.png">
-                {% endif %}
-            </div>
-            <div>特性：{{pkm.ability1.ability_CHS}} {{pkm.ability2.ability_CHS}} {{pkm.abilityH.ability_CHS}}</div>
-        </div>
-    </li>
-    {% endfor %}
-</ul>
+{% for pkm in pokemon_list %}
+<div class="type-color-bg-{{pkm.type1.type_id}}">
+    <div>
+        <a href="/stat/{{pkm.species}}-{{pkm.form}}">
+            <img src="{% static 'pkmstat/images/pkm_icon/' %}{{ pkm.species|stringformat:'03d' }}.png">
+        </a>
+    </div>
+    <div>#{{ pkm.species }} {{ pkm.name_CHS }} </div>
+    <div>
+        <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pkm.type1.type_EN }}_Text.png">
+        {% if pkm.type2 %}  
+        <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pkm.type2.type_EN }}_Text.png">
+        {% endif %}
+    </div>
+    <div>特性：{{pkm.ability1.ability_CHS}} {{pkm.ability2.ability_CHS}} {{pkm.abilityH.ability_CHS}}</div>
+</div>
+{% endfor %}
 
 
 <script type="text/javascript" src="{% static 'pkmstat/type_color.js' %}"></script>

@@ -1,3 +1,9 @@
+@font-face {
+    font-family: "icons";
+    src: url("fonts/icons.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
 
 .type-icon {
     max-width: 100px;    
@@ -15,15 +21,16 @@
 }
 
 .container {
-    width: 300px;
+    width: fit-content;
     position: relative;
 }
 
+div.center {
+    margin: 0 auto;
+}
 
 #pkm-image {
     width: 300px;
-    border: black 2px solid;
-    border-radius: 50%;
 }
 
 
@@ -44,17 +51,34 @@
     transition: .4s ease-in-out;
 }
 
+.icon-pokeball {
+    font-size: 300px;
+    font-family: "icons";
+    font-style: normal;
+}
+
+.icon-pokeball::before {
+    content: "\f12a";
+}
+
 .left {
     position: absolute;
-    left: 0;
+    left: -10%;
     /* float: left; */
 }
 
 .right {
     position: absolute;
-    right: 0;
+    right: -10%;
 
     /* float: right; */
+}
+
+.back {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
 }
 
 path.arrow {

@@ -19,6 +19,10 @@ for (var cls of document.querySelectorAll('.type-color-bg')) {
     cls.style.backgroundColor = `rgb(${colorMap[type_id]})`;
 };
 
+for (var cls of document.querySelectorAll('.type-color')) {
+    cls.style.color = `rgba(${colorMap[type_id]},.8)`;
+};
+
 for (var i=0; i<colorMap.length; i++) {
     for (var cls of document.querySelectorAll(`.type-color-bg-${i}`)) {
         cls.style.backgroundColor = `rgba(${colorMap[i]},.8)`;

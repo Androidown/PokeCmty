@@ -11,99 +11,97 @@
 <body>
 <h3>{{ pokemon.name_CHS }}</h3>
 <div hidden id="type_id">{{ pokemon.type1.type_id }}</div>
-<div class="container">
-    <div>
-        <img id="pkm-image" src="{% static 'pkmstat/images/pokemon/' %}{{ pokemon.species|stringformat:'03d' }}.png">
-        <div class="button left">
-            <a href="{{pokemon.species}}/prev">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path class="arrow type-color-fill" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
-                </svg>
-            </a>
-        </div>
-        <div class="button right">
-            <a href="{{pokemon.species}}/next">
-                <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path class="arrow type-color-fill" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
-                </svg>
-            </a>
-        </div>
+<div class="container center">
+    <img id="pkm-image" src="{% static 'pkmstat/images/pokemon/' %}{{ pokemon.species|stringformat:'03d' }}.png">
+    <i class="icon-pokeball back type-color"></i>
+    <div class="button left">
+        <a href="{{pokemon.species}}/prev">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path class="arrow type-color-fill" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+            </svg>
+        </a>
     </div>
-
+    <div class="button right">
+        <a href="{{pokemon.species}}/next">
+            <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path class="arrow type-color-fill" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+            </svg>
+        </a>
+    </div>
 </div>
 
-<table class="bg-龙 bd-电 roundy" style="white-space:nowrap">
-    <tbody>
-    <tr class="bgl-龙 textblack">
-        <th colspan="2" rowspan="1" class="roundytl-6"><a title="种族值">种族值</a>
-        </th>
-    </tr>
-    <tr class="bgl-HP">
-        <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
-            <div style="float:left" class="textblack"><a title="ＨＰ">ＨＰ</a>：</div>
-            <div style="float:right">{{pokemon.HP}}</div>
-        </th>
-        <td style="width:255px">
-            <div class="status-bar" style="width: calc(100% * {{pokemon.HP}}/255); height:20px"></div>
-        </td>
-    </tr>
-    <tr class="bgl-攻击">
-        <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
-            <div style="float:left" class="textblack"><a title="攻击">攻击</a>：</div>
-            <div style="float:right">{{pokemon.ATK}}</div>
-        </th>
-        <td style="width:255px">
-            <div class="status-bar" style="width: calc(100% * {{pokemon.ATK}}/255); height:20px"></div>
-        </td>
-    </tr>
-    <tr class="bgl-防御">
-        <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
-            <div style="float:left" class="textblack"><a title="防御">防御</a>：</div>
-            <div style="float:right">{{pokemon.DEF}}</div>
-        </th>
-        <td style="width:255px">
-            <div class="status-bar" style="width: calc(100% * {{pokemon.DEF}}/255); height:20px"></div>
-        </td>
-    </tr>
-    <tr class="bgl-特攻">
-        <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
-            <div style="float:left" class="textblack"><a title="特攻">特攻</a>：</div>
-            <div style="float:right">{{pokemon.SPA}}</div>
-        </th>
-        <td style="width:255px">
-            <div class="status-bar" style="width: calc(100% * {{pokemon.SPA}}/255); height:20px"></div>
-        </td>
-    </tr>
-    <tr class="bgl-特防">
-        <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
-            <div style="float:left" class="textblack"><a title="特防">特防</a>：</div>
-            <div style="float:right">{{pokemon.SPD}}</div>
-        </th>
-        <td style="width:255px">
-            <div class="status-bar" style="width: calc(100% * {{pokemon.SPD}}/255); height:20px"></div>
-        </td>
-    </tr>
-    <tr class="bgl-速度">
-        <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
-            <div style="float:left" class="textblack"><a title="速度">速度</a>：</div>
-            <div style="float:right">{{pokemon.SPE}}</div>
-        </th>
-        <td style="width:255px">
-            <div class="status-bar" style="width: calc(100% * {{pokemon.SPE}}/255); height:20px"></div>
-        </td>
-    </tr>
-    <tr class="bgl-速度">
-        <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
-            <div style="float:left" class="textblack"><a title="速度">总和</a>：</div>
-            <div style="float:right">{{pokemon.STAT_SUM}}</div>
-        </th>
-        <td style="width:255px">
-            <div class="status-bar" style="width: calc(100% * {{pokemon.STAT_SUM}}/1530); height:20px"></div>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<div>
+<div class="container center">
+    <table class="bg-龙 bd-电 roundy" style="white-space:nowrap">
+        <tbody>
+        <tr class="bgl-龙 textblack">
+            <th colspan="2" rowspan="1" class="roundytl-6"><a title="种族值">种族值</a>
+            </th>
+        </tr>
+        <tr class="bgl-HP">
+            <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
+                <div style="float:left">ＨＰ：</div>
+                <div style="float:right">{{pokemon.HP}}</div>
+            </th>
+            <td style="width:255px">
+                <div class="status-bar" style="width: calc(100% * {{pokemon.HP}}/255); height:20px"></div>
+            </td>
+        </tr>
+        <tr class="bgl-攻击">
+            <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
+                <div style="float:left">攻击：</div>
+                <div style="float:right">{{pokemon.ATK}}</div>
+            </th>
+            <td style="width:255px">
+                <div class="status-bar" style="width: calc(100% * {{pokemon.ATK}}/255); height:20px"></div>
+            </td>
+        </tr>
+        <tr class="bgl-防御">
+            <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
+                <div style="float:left">防御：</div>
+                <div style="float:right">{{pokemon.DEF}}</div>
+            </th>
+            <td style="width:255px">
+                <div class="status-bar" style="width: calc(100% * {{pokemon.DEF}}/255); height:20px"></div>
+            </td>
+        </tr>
+        <tr class="bgl-特攻">
+            <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
+                <div style="float:left">特攻：</div>
+                <div style="float:right">{{pokemon.SPA}}</div>
+            </th>
+            <td style="width:255px">
+                <div class="status-bar" style="width: calc(100% * {{pokemon.SPA}}/255); height:20px"></div>
+            </td>
+        </tr>
+        <tr class="bgl-特防">
+            <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
+                <div style="float:left">特防：</div>
+                <div style="float:right">{{pokemon.SPD}}</div>
+            </th>
+            <td style="width:255px">
+                <div class="status-bar" style="width: calc(100% * {{pokemon.SPD}}/255); height:20px"></div>
+            </td>
+        </tr>
+        <tr class="bgl-速度">
+            <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
+                <div style="float:left">速度：</div>
+                <div style="float:right">{{pokemon.SPE}}</div>
+            </th>
+            <td style="width:255px">
+                <div class="status-bar" style="width: calc(100% * {{pokemon.SPE}}/255); height:20px"></div>
+            </td>
+        </tr>
+        <tr class="bgl-速度">
+            <th style="width:90px; padding-left:0.5em; padding-right:0.5em">
+                <div style="float:left">总和：</div>
+                <div style="float:right">{{pokemon.STAT_SUM}}</div>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="center">
     <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pokemon.type1.type_EN }}_Text.png">
     {% if pokemon.type2 %}  
     <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pokemon.type2.type_EN }}_Text.png">
