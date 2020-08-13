@@ -130,6 +130,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'assets'),
+    os.path.join(BASE_DIR, 'assets', 'faws'),
+]
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

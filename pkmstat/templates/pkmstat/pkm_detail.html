@@ -6,6 +6,8 @@
     {% load humanize %}
     <link rel="stylesheet" type="text/css" href="{% static 'pkmstat/move_pool.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'pkmstat/pm_info.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'bluma.css' %}" />
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
     <title>{{ pokemon.name_CHS }}</title>
 </head>
 <body>
@@ -13,7 +15,10 @@
 <div hidden id="type_id">{{ pokemon.type1.type_id }}</div>
 <div class="container center">
     <img id="pkm-image" src="{% static 'pkmstat/images/pokemon/' %}{{ pokemon.species|stringformat:'03d' }}.png">
-    <i class="icon-pokeball back type-color"></i>
+    {% if pokemon.type2 %}
+    <i class="icon-pokeball back type-color-{{ pokemon.type2.type_id}}" style="overflow: hidden; height: 54%;"></i>
+    {% endif %}
+    <i class="icon-pokeball back type-color-{{ pokemon.type1.type_id }}" style="overflow: hidden; z-index: -2;"></i>
     <div class="button left">
         <a href="{{pokemon.species}}/prev">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -101,13 +106,13 @@
     </table>
 </div>
 
-<div class="center">
+<div class="container center">
     <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pokemon.type1.type_EN }}_Text.png">
     {% if pokemon.type2 %}  
     <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pokemon.type2.type_EN }}_Text.png">
     {% endif %}
+    <div>特性：{{pokemon.ability1.ability_CHS}} {{pokemon.ability2.ability_CHS}} {{pokemon.abilityH.ability_CHS}}</div>
 </div>
-<div>特性：{{pokemon.ability1.ability_CHS}} {{pokemon.ability2.ability_CHS}} {{pokemon.abilityH.ability_CHS}}</div>
 <div>技能池：</div>
 <div class="wrap-table">
     <table class="move-table">

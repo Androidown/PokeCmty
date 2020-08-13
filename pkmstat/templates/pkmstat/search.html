@@ -2,12 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'bulma.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}" />
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
     <title>Search</title>
 </head>
 <body>
-    <form action="" method="get">
-        <input type="text" name="key">
-        <input type="submit" value="Search">
-    </form>
+    <div class="control has-icons-left has-icons-right" style="max-width: 600px; margin: 0 auto;">
+        <form action="" method="get" style="position: relative;">
+            <input class="input is-rounded" type="text" name="key" placeholder="Search...">
+            <span class="icon is-medium is-left">
+                <i class="fas fa-ellipsis-v"></i>
+            </span>
+            <button class="button is-rounded" style="top: 0; position: absolute; right: 0; border: 0; background-color: rgba(0,0,0,0);">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+
 </body>
 </html>
