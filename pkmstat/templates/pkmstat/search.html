@@ -11,7 +11,7 @@
 <body>
     <div class="control has-icons-left has-icons-right" style="max-width: 600px; margin: 0 auto;">
         <form action="" method="get" style="position: relative;">
-            <input class="input is-rounded" type="text" name="key" placeholder="Search...">
+            <input class="input is-rounded" type="text" name="key" placeholder="Search..." value="{{key}}">
             <span class="icon is-medium is-left">
                 <i class="fas fa-ellipsis-v"></i>
             </span>
@@ -20,6 +20,6 @@
             </button>
         </form>
     </div>
-
+    <div>{% block result %}{% endblock %}</div>
 </body>
 </html>

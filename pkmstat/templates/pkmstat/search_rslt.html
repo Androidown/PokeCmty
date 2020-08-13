@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Search Result</title>
-</head>
+{% extends 'pkmstat/search.html' %}
+
+{% block result %}
 {% load static %}
-<body>
-    {% if pokemon_list %}
-        <p>Found {{ pokemon_list|length }} PokeMon{{ pokemon_list|pluralize }}: </p>
-        {% include 'pkmstat/base_list.html' %}
-    {% else %}
-        <p>No result found for {{ key }}</p>
-    {% endif %}
-</body>
-</html>
+{% if pokemon_list %}
+    <p>Found {{ pokemon_list|length }} PokeMon{{ pokemon_list|pluralize }}: </p>
+    {% include 'pkmstat/base_list.html' %}
+{% else %}
+    <p>No result found for {{ key }}</p>
+{% endif %}
+{% endblock %}

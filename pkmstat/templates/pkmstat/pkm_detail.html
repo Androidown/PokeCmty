@@ -36,6 +36,18 @@
 </div>
 
 <div class="container center">
+    <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pokemon.type1.type_EN }}_Text.png">
+    {% if pokemon.type2 %}  
+    <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pokemon.type2.type_EN }}_Text.png">
+    {% endif %}
+    <div>
+        {{pokemon.ability1.ability_CHS}} 
+        {% if pokemon.ability1 != pokemon.ability2 %}  {{pokemon.ability2.ability_CHS}} {% endif %}
+        {% if pokemon.abilityH != pokemon.ability1 %}  {{pokemon.abilityH.ability_CHS}} <sup style="font-size: .5em;">[H]</sup> {% endif %}
+    </div>
+</div>
+
+<div class="container center">
     <table class="bg-龙 bd-电 roundy" style="white-space:nowrap">
         <tbody>
         <tr class="bgl-龙 textblack">
@@ -106,13 +118,6 @@
     </table>
 </div>
 
-<div class="container center">
-    <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pokemon.type1.type_EN }}_Text.png">
-    {% if pokemon.type2 %}  
-    <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pokemon.type2.type_EN }}_Text.png">
-    {% endif %}
-    <div>特性：{{pokemon.ability1.ability_CHS}} {{pokemon.ability2.ability_CHS}} {{pokemon.abilityH.ability_CHS}}</div>
-</div>
 <div>技能池：</div>
 <div class="wrap-table">
     <table class="move-table">

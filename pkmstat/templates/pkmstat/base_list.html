@@ -1,23 +1,34 @@
 {% load static %}
 {% load humanize %}
 <link rel="stylesheet" type="text/css" href="{% static 'pkmstat/pm_preview.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'bulma.css' %}" />
+<div class="columns is-multiline is-2">
 {% for pkm in pokemon_list %}
-<div class="type-color-bg-{{pkm.type1.type_id}}">
-    <div>
-        <a href="/stat/{{pkm.species}}-{{pkm.form}}">
-            <img src="{% static 'pkmstat/images/pkm_icon/' %}{{ pkm.species|stringformat:'03d' }}.png">
-        </a>
+<!-- <div class="type-color-bg-{{pkm.type1.type_id}} card"> -->
+<div class="column is-one-third ">
+<div class="card">
+    <div class="columns is-gapless type-color-bg-{{pkm.type1.type_id}}">
+        <div class="column is-two-fifths">
+            <a href="/stat/{{pkm.species}}-{{pkm.form}}">
+                <figure class="image is-68x56">
+                    <img src="{% static 'pkmstat/images/pkm_icon/' %}{{ pkm.species|stringformat:'03d' }}.png" alt="Placeholder image">
+                </figure>
+            </a>
+        </div>
+        <div class="column">
+            <div><b>#{{ pkm.species }}</b> <span  style="font-size: 1.5em; font-weight: bold;"> {{ pkm.name_CHS }} </span></div>
+            <div>
+                <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pkm.type1.type_EN }}_Text.png">
+                {% if pkm.type2 %}
+                <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pkm.type2.type_EN }}_Text.png">
+                {% endif %}
+            </div>
+        </div>
     </div>
-    <div>#{{ pkm.species }} {{ pkm.name_CHS }} </div>
-    <div>
-        <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pkm.type1.type_EN }}_Text.png">
-        {% if pkm.type2 %}  
-        <img class="type-icon" src="{% static 'pkmstat/images/type/' %}{{ pkm.type2.type_EN }}_Text.png">
-        {% endif %}
-    </div>
-    <div>特性：{{pkm.ability1.ability_CHS}} {{pkm.ability2.ability_CHS}} {{pkm.abilityH.ability_CHS}}</div>
+
+</div>
 </div>
 {% endfor %}
-
+</div>
 
 <script type="text/javascript" src="{% static 'pkmstat/type_color.js' %}"></script>
