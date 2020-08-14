@@ -11,16 +11,16 @@
 }
 
 .status-bar {
-    background-color: #4b5a6b;
-    animation: linearwipe .4s steps(100, end); 
-    width: 0%;
-}
-  
-@keyframes linearwipe{ 
-    from { width: 0; } 
+    background-color: #e4c465;
+    animation: progressBar 1s ease-in-out;
 }
 
-.container {
+@keyframes progressBar {
+  from {width: 0};
+}
+
+
+.poke-container {
     width: fit-content;
     position: relative;
 }
@@ -34,7 +34,7 @@ div.center {
 }
 
 
-.button {
+.round-button {
     border-radius: 50%;
     background-color: white;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.04), 0 4px 8px 0 rgba(0,0,0,0.20);
@@ -46,7 +46,7 @@ div.center {
 }
 
 
-.button:hover{
+.round-button:hover{
     opacity: 1;
     transition: .4s ease-in-out;
 }
@@ -55,6 +55,7 @@ div.center {
     font-size: 300px;
     font-family: "icons";
     font-style: normal;
+    line-height: 1;
 }
 
 .icon-pokeball::before {
@@ -76,7 +77,7 @@ div.center {
 
 .back {
     position: absolute;
-    top: -15px;
+    top: 0;
     left: 0;
     z-index: -1;
     margin: 0 auto;
@@ -85,4 +86,12 @@ div.center {
 path.arrow {
     fill: rgb(33, 212, 142);
     /* background-color: lightblue; */
+}
+
+.progress::-webkit-progress-value {
+    transition: width 0.5s ease;
+}
+
+.progress::before {
+    content: attr(value);
 }
